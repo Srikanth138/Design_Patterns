@@ -4,7 +4,7 @@ import com.nt.sdp.Printer;
 
 public class SingletonTest {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		Printer p1=Printer.getInstance();
 		Printer p2=Printer.getInstance();
 		
