@@ -1,8 +1,10 @@
 package com.nt.sdp;
 
+import com.nt.commons.CommonsUtil;
+
 /* 1. if u create object for sub class of abstract class. then abstract class constructor executes. but it does not mean object is create for abstract class
  * 2. if u create object by using cloning process or deserialization process then no constructor will execute. but it does not mean object is not created there. */
-public class Printer {
+public class Printer extends CommonsUtil {
 
 	// Creating singleton java with eager instantiatin(Creating object during class
 	// loading even though no one has asked for object creation)is bad practice.
@@ -64,6 +66,30 @@ public class Printer {
 	public static Printer getInstance() {
 		return InnerPrinter.Instance;
 	}
+	
+	
+	
+	//To  Stop Cloning
+		@Override
+		public  Object clone()throws CloneNotSupportedException  {
+			throw new CloneNotSupportedException("Cloning not allowed in Singleton Printer classs");
+			//return InnerPrinter.INSTANCE;
+		}
+		
+		//To Stop DeSerialization
+		private static  final long serialVersionUID=5354353L;
+		public  Object readResolve() {
+			return InnerPrinter.Instance;
+			//throw  new  IllegalArgumentException("Derailziation is not allowed on singleton class");
+		}
+		
+		/*	@Override
+			public String toString() {
+				return super.toString();
+			}*/
+		public String hello() {
+			return "hello";
+		}
 
 	// Business logic
 	public void print(String msg) {
